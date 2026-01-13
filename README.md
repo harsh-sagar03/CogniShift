@@ -5,7 +5,7 @@
 
 CogniShift is an AI-powered browser extension designed to revolutionize how neurodiverse students interact with the web. Developed for the Innovate 3.0 Hackathon at JIIT Noida, CogniShift leverages cutting-edge, on-device artificial intelligence to create a personalized, distraction-free, and supportive learning environment.
 
-## The Why (Problem Statement) ❓
+## The Why (Problem Statement) ?
 
 The modern web is built for the "neurotypical" brain, often prioritizing engagement through constant stimulation. For **neurodivergent** students, this creates a digital environment full of obstacles:
 
