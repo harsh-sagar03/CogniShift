@@ -11,6 +11,5 @@ The modern web is built for the "neurotypical" brain, often prioritizing engagem
 
 * **Sensory Overload:** Autoplay videos, flashing banners, and cluttered sidebars compete for limited attention, leading to rapid cognitive fatigue.
 * **The "Wall of Text" Effect:** Long, unstructured articles can feel insurmountable, often causing students to abandon research before they even begin.
-* **Privacy Paranoia:** Many existing "assistance" tools send sensitive user data to the cloud for processing, creating a barrier for those who are privacy-conscious.
 
 **CogniShift** was born to bridge this gap. By moving the "intelligence" of the web directly onto the user's device, we create a browsing experience that is not just productive, but **inclusive**.
