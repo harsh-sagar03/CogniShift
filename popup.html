@@ -1,0 +1,225 @@
+<head>
+  <meta charset="UTF-8" />
+  <title>CogniShift</title>
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --bg-color: #ffffff;
+      --text-color: #1f2937;
+      --border-color: #e5e7eb;
+      --hover-bg: #f3f4f6;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      width: 350px;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    /* Header */
+    .header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      padding: 12px 16px 0;
+      gap: 8px;
+      background: #f9fafb;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab {
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: white;
+      color: var(--primary-color);
+      border-color: var(--border-color);
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
+      font-weight: 600;
+    }
+
+    .tab:hover:not(.active) {
+      color: #374151;
+      background: #e5e7eb;
+    }
+
+    /* Content */
+    .content {
+      padding: 20px;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* Controls Grid */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .control-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #4b5563;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .control-btn:hover {
+      background: var(--hover-bg);
+      border-color: #d1d5db;
+    }
+
+    .control-btn.active {
+      background: #eff6ff;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .control-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Main Action Button */
+    .primary-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .primary-btn:hover {
+      background: #2563eb;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      padding: 10px;
+      background: white;
+      border: 1px solid var(--border-color);
+      color: #4b5563;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .secondary-btn:hover {
+      background: var(--hover-bg);
+    }
+
+    /* Disabled State */
+    .disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="logo.png" alt="Logo" class="logo">
+    <div class="title">CogniShift</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="adhd">ADHD Mode</div>
+    <div class="tab" data-tab="dyslexia">Dyslexia Mode</div>
+    <div class="tab" data-tab="autism">Autism Mode</div>
+  </div>
+
+  <div class="content">
+    <!-- ADHD Panel -->
+    <div id="adhd-panel" class="panel active">
+      <button id="adhd-action" class="primary-btn">Run ADHD Focus Analysis</button>
+      
+      <div class="controls-grid">
+        <button id="toggle-dark" class="control-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          Dark Mode
+        </button>
+        <button id="toggle-speech" class="control-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Read Aloud
+        </button>
+        <button id="toggle-bionic" class="control-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Bionic Read
+        </button>
+        <button id="toggle-ruler" class="control-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6M2 12V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6M10 2v20"></path></svg>
+          Focus Ruler
+        </button>
+      </div>
+
+      <button id="restore" class="secondary-btn">Show Original Content</button>
+    </div>
+
+    <!-- Dyslexia Panel (Placeholder) -->
+    <div id="dyslexia-panel" class="panel">
+      <p style="text-align: center; color: #6b7280; margin: 20px 0;">Dyslexia Mode coming soon.</p>
+    </div>
+
+    <!-- Autism Panel (Placeholder) -->
+    <div id="autism-panel" class="panel">
+      <p style="text-align: center; color: #6b7280; margin: 20px 0;">Autism Mode coming soon.</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>

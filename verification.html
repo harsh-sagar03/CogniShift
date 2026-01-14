@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniShift Verification</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simulate the injected container -->
+    <div id="cogni-container" style="
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.8;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    position: relative;
+  ">
+        <style>
+            /* Styles from content.js */
+            #cogni-container {
+                font-family: 'Inter', sans-serif;
+                color: #374151;
+            }
+
+            #cogni-container h1,
+            #cogni-container h2 {
+                color: #111827;
+                margin-top: 1.5em;
+                font-weight: 700;
+            }
+
+            #cogni-container p {
+                margin-bottom: 1.2em;
+                font-size: 18px;
+            }
+
+            .cogni-tldr {
+                background: #f0f9ff;
+                border-left: 4px solid #0ea5e9;
+                padding: 16px;
+                margin-bottom: 24px;
+                color: #0c4a6e;
+            }
+
+            #cogni-container strong {
+                background-color: #fef08a;
+                color: #854d0e;
+                padding: 2px 6px;
+                border-radius: 4px;
+            }
+
+            .cogni-first-sentence {
+                background-color: rgba(186, 230, 253, 0.3);
+            }
+
+            b.cogni-bionic {
+                background-color: transparent !important;
+                color: inherit !important;
+                padding: 0 !important;
+                font-weight: 700 !important;
+            }
+
+            /* Ruler */
+            #reading-ruler {
+                position: fixed;
+                left: 0;
+                width: 100%;
+                height: 80px;
+                background: rgba(0, 0, 0, 0.4);
+                pointer-events: none;
+                z-index: 9999;
+                display: none;
+                border-top: 100vh solid rgba(0, 0, 0, 0.4);
+                border-bottom: 100vh solid rgba(0, 0, 0, 0.4);
+                transform: translateY(-100vh);
+            }
+
+            /* Progress */
+            #reading-progress-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 6px;
+                background: rgba(0, 0, 0, 0.05);
+                z-index: 10000;
+            }
+
+            #reading-progress-bar {
+                height: 100%;
+                background: #3b82f6;
+                width: 0%;
+                transition: width 0.1s;
+            }
+
+            #reading-progress-text {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(59, 130, 246, 0.1);
+                color: #3b82f6;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+                z-index: 10000;
+                pointer-events: none;
+            }
+
+            /* Dark Mode */
+            body.dark-mode {
+                background-color: #111827 !important;
+            }
+
+            #cogni-container.dark-mode {
+                background: #111827 !important;
+                color: #e5e7eb !important;
+            }
+
+            #cogni-container.dark-mode h1,
+            #cogni-container.dark-mode h2 {
+                color: #f3f4f6 !important;
+            }
+
+            #cogni-container.dark-mode strong {
+                background-color: #374151 !important;
+                color: #fbbf24 !important;
+            }
+
+            /* Toggle Buttons */
+            .cogni-toggle {
+                background: #f3f4f6;
+                border: 1px solid #d1d5db;
+                color: #374151;
+                padding: 8px 16px;
+                border-radius: 20px;
+                cursor: pointer;
+                margin-right: 10px;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .cogni-toggle.active {
+                background: #3b82f6;
+                color: white;
+                border-color: #2563eb;
+            }
+        </style>
+
+        <div id="reading-progress-container">
+            <div id="reading-progress-bar"></div>
+        </div>
+        <div id="reading-progress-text">0%</div>
+        <div id="reading-ruler"></div>
+
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 20px;">
+            <button id="restore"
+                style="background: white; border: 1px solid #d1d5db; padding: 8px 16px; border-radius: 8px; cursor: pointer;">🔙
+                Show Original</button>
+            <div>
+                <button id="toggle-dark" class="cogni-toggle">Dark Mode</button>
+                <button id="toggle-speech" class="cogni-toggle">Read Aloud</button>
+                <button id="toggle-bionic" class="cogni-toggle">Bionic Read</button>
+                <button id="toggle-ruler" class="cogni-toggle">Focus Ruler</button>
+            </div>
+        </div>
+
+        <div id="cogni-content">
+            <h1>Sample Article Title</h1>
+            <div class="cogni-tldr"><strong>TL;DR:</strong> This is a summary of the article. It helps you understand
+                the main points quickly.</div>
+            <p><span class="cogni-first-sentence">This is the first sentence of the paragraph.</span> It is highlighted
+                to help you focus. The rest of the paragraph follows here. It contains some <strong>bold text</strong>
+                and other information.</p>
+            <p>Here is another paragraph. It demonstrates how the reading ruler and bionic reading features work on
+                multiple blocks of text.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- Logic from content.js (simplified for testing) ---
+        let isDarkMode = false;
+        let rulerActive = false;
+        let bionicActive = false;
+        let isSpeaking = false;
+        let speechUtterance = null;
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            const container = document.getElementById("cogni-container");
+            container.classList.toggle("dark-mode", isDarkMode);
+            document.body.classList.toggle("dark-mode", isDarkMode);
+            document.getElementById("toggle-dark").classList.toggle("active", isDarkMode);
+        }
+
+        function toggleSpeech() {
+            // Mock speech for testing
+            isSpeaking = !isSpeaking;
+            document.getElementById("toggle-speech").classList.toggle("active", isSpeaking);
+            console.log("Speech toggled:", isSpeaking);
+        }
+
+        function toggleBionic() {
+            const contentDiv = document.getElementById("cogni-content");
+            bionicActive = !bionicActive;
+            document.getElementById("toggle-bionic").classList.toggle("active", bionicActive);
+
+            if (bionicActive) {
+                const walker = document.createTreeWalker(contentDiv, NodeFilter.SHOW_TEXT, null, false);
+                let node;
+                const nodesToReplace = [];
+                while (node = walker.nextNode()) {
+                    if (node.textContent.trim().length > 0) nodesToReplace.push(node);
+                }
+                nodesToReplace.forEach(node => {
+                    const words = node.textContent.split(' ');
+                    const newHTML = words.map(word => {
+                        if (word.length < 2) return word;
+                        const boldLen = Math.ceil(word.length / 2);
+                        return `<b class="cogni-bionic">${word.slice(0, boldLen)}</b>${word.slice(boldLen)}`;
+                    }).join(' ');
+                    const span = document.createElement('span');
+                    span.innerHTML = newHTML;
+                    node.parentNode.replaceChild(span, node);
+                });
+            } else {
+                const bionicTags = contentDiv.querySelectorAll('b.cogni-bionic');
+                bionicTags.forEach(tag => {
+                    const text = document.createTextNode(tag.textContent);
+                    tag.parentNode.replaceChild(text, tag);
+                });
+            }
+        }
+
+        function toggleRuler() {
+            rulerActive = !rulerActive;
+            const ruler = document.getElementById("reading-ruler");
+            ruler.style.display = rulerActive ? "block" : "none";
+            document.getElementById("toggle-ruler").classList.toggle("active", rulerActive);
+        }
+
+        function updateRulerPosition(e) {
+            if (rulerActive) {
+                const ruler = document.getElementById("reading-ruler");
+                ruler.style.top = (e.clientY - 40) + "px";
+            }
+        }
+
+        // Attach listeners
+        document.getElementById("toggle-dark").onclick = toggleDarkMode;
+        document.getElementById("toggle-speech").onclick = toggleSpeech;
+        document.getElementById("toggle-bionic").onclick = toggleBionic;
+        document.getElementById("toggle-ruler").onclick = toggleRuler;
+        window.addEventListener("mousemove", updateRulerPosition);
+
+    </script>
+</body>
+
+</html>
