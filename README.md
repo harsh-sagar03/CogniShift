@@ -1,12 +1,21 @@
-# CogniShift Extension
+# CogniShift
 
-## How to Install
+![Gemini](https://img.shields.io/badge/AI-Gemini-blue?style=for-the-badge&logo=googlegemini&logoColor=white) ![JavaScript](https://img.shields.io/badge/Logic-JavaScript-yellow?style=for-the-badge&logo=javascript&logoColor=black) ![Security](https://img.shields.io/badge/Security-DOMPurify-red?style=for-the-badge&logo=probot&logoColor=white)
 
-1.  **Download** this folder to your computer.
-2.  Open **Google Chrome**.
-3.  Go to `chrome://extensions/` (or click the puzzle piece icon > Manage Extensions).
-4.  Turn on **Developer mode** (toggle switch in the top right corner).
-5.  Click the **Load unpacked** button (top left).
-6.  Select this entire `cognishiftt` folder.
+# Key Features (ADHD FOCUS MODE)
+CogniShift's ADHD mode reduces cognitive overload using AI simplification, guided reading, and distraction-free design tailored to ADHD patterns.
 
-The extension is now installed! Click the "C" icon in your toolbar to use it.
+* **AI Content Simplification**: Uses **Gemini** to instantly rewrite complex sentences into clear, ADHD-friendly language without ever sending data to the cloud.
+* **Keyword Pastel Highlights**: Automatically identifies and highlights core concepts in soft, non-stimulating pastel colors to aid memory retention and visual scanning.
+* **Focus Ruler**: A customizable horizontal guide that follows your cursor, creating a "reading lane" to prevent eye-wandering and line-skipping.
+* **Bionic Reading**: Enhances text by bolding the first few letters of each word, creating artificial fixation points that guide the eye for faster, more rhythmic reading.
+* **Distraction Removal**: A "one-click" clean view that strips away autoplay videos, sidebars, and intrusive pop-ups, leaving only the essential content.
+
+# How It Works
+
+The **CogniShift** engine follows a precise four-stage pipeline to transform the web experience:
+
+1. **Extraction**: The extension uses **JavaScript Content Scripts** to identify and capture the primary readable content from the active tab, stripping away unnecessary metadata.
+2. **Processing**: The extracted text is sent to the **Gemini** model. The AI performs real-time simplification and summarization locally, ensuring zero data latency and absolute user privacy.
+3. **Sanitization**: Before the AI's response is rendered, it is scrubbed by **DOMPurify**. This crucial step prevents XSS (Cross-Site Scripting) by ensuring no malicious code can be injected into the browser UI.
+4. **Injection & Visualization**: The "clean" simplified text is injected back into the webpage for the user. Simultaneously, **Chart.js** processes the session data to update the user’s productivity metrics on the dashboard.
